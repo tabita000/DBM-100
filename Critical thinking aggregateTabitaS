@@ -1,0 +1,75 @@
+/* Below, I have created two tables, rental and rentalData. The rental table 
+Consists of movie names, the movie category, and the year in which it was released. 
+The second table, rental data consists of names of people who rented the movies and 
+the date on which the movies were rented.*/
+
+CREATE table rental (Movie TEXT,MovieCategory TEXT, ReleaseYear INT);
+INSERT INTO rental VALUES ('The Silver Chair', 'Fantasy', '1990');
+INSERT INTO rental VALUES ('Fantastic Mr.Fox', 'Comedy /Adventure', '2009');
+INSERT INTO rental VALUES ('Wall-E', 'Sci-fi', '2008');
+INSERT INTO rental VALUES ('Home', 'Sci-fi', '2015'); 
+
+SELECT * FROM rental;
+SELECT * FROM rentalData;
+
+CREATE table rentalData (Name TEXT, Movie TEXT, RentDate TEXT);
+INSERT INTO rentalData VALUES ('Tabita', 'The Silver Chair', '10-03-23');
+INSERT INTO rentalData VALUES ('Albert', 'Fantastic Mr.Fox', '10-04-23');
+INSERT INTO rentalData VALUES ('Silvia', 'Wall-E', '10-03-23');
+INSERT INTO rentalData VALUES ('Albert', 'Wall-E', '10-03-23');
+INSERT INTO rentalData VALUES ('Silvia', 'Edward Scissorhands', '10-03-23');
+INSERT INTO rentalData VALUES ('Tabita', 'Wall-E', '10-03-23');
+INSERT INTO rentalData VALUES ('Silvia', 'Fantastic Mr.Fox', '10-03-23');
+
+
+SELECT * FROM rental;
+SELECT * FROM rentalData;
+
+DROP TABLE IF EXISTS rental;
+DROP TABLE IF EXISTS rentalData;
+
+
+/*Aggregate count query*/
+SELECT Movie, COUNT(*) 
+FROM rentalData
+GROUP BY Movie;
+    
+/*Aggregate DESCENDING query*/
+SELECT Movie, COUNT(*) AS count
+FROM rentalData
+GROUP BY Movie
+ORDER BY count DESC, Movie;
+    
+/*Aggregate Join query to count*/
+SELECT rd.Name AS name, COUNT(r.Movie) AS movieName
+FROM rentalData AS rd
+JOIN rental AS r
+ON rd.Movie = r.Movie
+GROUP BY rd.Name;
+
+/*having clause-IF YOU WANT TO COUNT MORE THAN 1 MOVIE*/
+SELECT rd.Name AS name, COUNT(r.Movie) AS movieName
+FROM rentalData AS rd
+JOIN rental AS r
+ON rd.Movie = r.Movie
+GROUP BY rd.Name
+HAVING movieName < 3
+ORDER BY movieName DESC, name;
+
+
+/*To work on the non-aggregate parts of this same query. 
+I can use the WHERE clause to filter the non-aggregate part of the qery*/
+SELECT rd.Name AS name, COUNT(r.Movie) AS movieName
+FROM rentalData AS rd
+JOIN rental AS r
+ON rd.Movie = r.Movie
+WHERE r.ReleaseYear >= 2000
+GROUP BY rd.Name;
+
+
+    
+/*Aggregtaing Distinct Values*/
+SELECT COUNT(MovieCategory) FROM rental;
+SELECT MovieCategory FROM rental ORDER BY MovieCategory;
+SELECT COUNT(DISTINCT MovieCategory) FROM rental;
+
