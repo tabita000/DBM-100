@@ -1,0 +1,28 @@
+/*Design a database that will manipulate dates & times in a useful way.*/
+
+/* This schema demonstrates the following functions: date(), time() and 
+datetime().*/
+
+
+/* Here i'm creating a table with employees and when they were hired*/
+
+DROP TABLE IF EXISTS employee;
+CREATE TABLE employee (Name TEXT, employment_Date TEXT, employment_Time TEXT);
+INSERT INTO employee (Name, employment_Date, employment_Time)
+VALUES ('Sam Smith', '2002-10-18', '08:00:00'),
+('Sean Salman', '2016-01-09', '10:00:00'),
+('Henry Mckee', '2019-09-25', '09:00:00');
+SELECT * FROM employee;
+
+
+/*This Query retrieves, three pieces of information that is the current datetime, date, and time*/
+SELECT datetime('now'), date('now'), time('now');
+
+
+
+/*This query is used to get data from the table of employee. This query should return a list of 
+employee with their employment dates in the proper format*/
+
+SELECT Name, datetime(employment_Date), date(employment_Date), time(employment_Time) FROM employee;
+
+
