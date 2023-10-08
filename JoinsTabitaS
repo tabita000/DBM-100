@@ -1,0 +1,23 @@
+CREATE TABLE Customers (CustomerId INT, Name TEXT, Phone int, City TEXT);
+CREATE TABLE Product ( ProductId INT, CustomerId INT, OrderedDate INT);
+
+INSERT INTO Customers VALUES (1, 'Silvia Rufus', '224-806-4105', 'Cary');
+INSERT INTO Customers VALUES (2, 'Tabita Sadiq', '847-533-9516', 'Crystal lake');
+INSERT INTO Customers VALUES (3, 'Sunaina Zareen', '847-370-9568', 'Barrington');
+
+INSERT INTO Product VALUES ( 5541, 1, '07-22-2023');
+INSERT INTO Product VALUES ( 5542, 2, '13-02-2023');
+INSERT INTO Product VALUES ( 5543, 3, '19-06-2023');
+
+SELECT * FROM Customers;
+SELECT * FROM Product;
+
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Product;
+
+
+SELECT c.CustomerId, c.Name,
+p.OrderedDate
+FROM Customers AS c
+JOIN Product AS p
+ON c.CustomerId=p.CustomerId;
