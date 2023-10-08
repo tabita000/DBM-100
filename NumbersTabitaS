@@ -1,0 +1,23 @@
+
+--Design a table of numbers that you will manipulate to extract observations (ie the average age of males in
+--Crystal Lake rounded up to an even number or the number of children per family in Harvard)--
+
+CREATE TABLE crystalLakeMales (personID INTEGER, Name TEXT, LastName TEXT, Age INT);
+
+INSERT INTO crystalLakeMales VALUES (1,'Sean','Sadiq', 35);
+INSERT INTO crystalLakeMales VALUES (2, 'Dan', 'Schnieder', 40);
+INSERT INTO crystalLakeMales VALUES (3,'Mat', 'Damian', 45);
+INSERT INTO crystalLakeMales VALUES (4, 'Drew', 'Bolt', 50);
+INSERT INTO crystalLakeMales VALUES (5, 'Albert','Sadiq', 55);
+INSERT INTO crystalLakeMales VALUES (6, 'Scott','Smith',60);
+INSERT INTO crystalLakeMales VALUES (7, 'Andrew', 'Nadal', 65);
+
+
+SELECT * FROM crystalLakeMales;
+
+DROP TABLE IF EXISTS crystalLakeMales;
+
+SELECT ROUND(AVG(Age)) FROM crystalLakeMales;
+
+
+
